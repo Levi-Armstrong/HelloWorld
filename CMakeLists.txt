@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
+project(github_action_ccache VERSION 0.1.0 LANGUAGES CXX)
 
-project(main)
-
-add_executable(main main.cpp)
+add_executable(main src/main.cpp)
 
 install(TARGETS main)
+install(FILES package.xml DESTINATION share/${PROJECT_NAME})
 
 enable_testing()
 add_test(NAME main COMMAND main)
