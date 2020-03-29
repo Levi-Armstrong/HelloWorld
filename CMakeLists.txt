@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.5)
 project(github_action_ccache VERSION 0.1.0 LANGUAGES CXX)
 
 add_executable(main src/main.cpp)
