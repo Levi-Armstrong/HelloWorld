@@ -10,24 +10,23 @@ jobs:
       fail-fast: false
       matrix:
         env:
-          - {CI_NAME: "Melodic Build",
-             CI_ARTIFACT: "melidic.tar.xz",
-             CCACHE_DIR: "/github/home/.ccache",
+          - {BADGE: bionic,
+             CI_NAME: "Melodic Build",
+             CCACHE_DIR: "/github/home/bionic/.ccache",
              DOCKER_IMAGE: "lharmstrong/tesseract:melodic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: bionic,
              ROS_DISTRO: melodic,
              ROS_REPO: main,
-             BADGE: bionic}
-          - {CI_NAME: "Kinetic Build",
-             CI_ARTIFACT: "kinetic.tar.xz",
-             CCACHE_DIR: "/github/home/.ccache",
+             }
+          - {BADGE: xenial,
+             CI_NAME: "Kinetic Build",
+             CCACHE_DIR: "/github/home/xenial/.ccache",
              DOCKER_IMAGE: "lharmstrong/tesseract:kinetic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: xenial,
              ROS_DISTRO: kinetic,
-             ROS_REPO: main,
-             BADGE: xenial}
+             ROS_REPO: main}
 
     steps:
     - uses: actions/checkout@v1
@@ -38,24 +37,14 @@ jobs:
       run: |
         string(TIMESTAMP current_date "%Y-%m-%d-%H;%M;%S" UTC)
         message("::set-output name=timestamp::${current_date}")
+
     - name: ccache cache files
       uses: actions/cache@v1.1.0
       with:
-        path: /github/home/.ccache
+        path: /github/home/${{ matrix.env.BADGE }}/.ccache
         key: ${{ matrix.env.CI_NAME }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
         restore-keys: |
           ${{ matrix.env.CI_NAME }}-ccache-
 
     - uses: 'ros-industrial/industrial_ci@master'
       env: ${{matrix.env}}
-
-#    - name: Pack
-#      working-directory: instdir
-#      run: ${{ steps.cmake_and_ninja.outputs.cmake_dir }}/cmake -E tar cJfv ../${{ matrix.env.CI_ARTIFACT }} .
-
-#    - name: Upload
-#      uses: actions/upload-artifact@v1
-#      with:
-#        path: ./${{ matrix.env.CI_ARTIFACT }}
-#        name: ${{ matrix.env.CI_ARTIFACT }}
-
