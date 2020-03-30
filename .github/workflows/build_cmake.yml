@@ -12,7 +12,7 @@ jobs:
         env:
           - {BADGE: bionic,
              CI_NAME: "Melodic Build",
-             CCACHE_DIR: '${env:GITHUB_WORKSPACE}/bionic/.ccache',
+             CCACHE_DIR: "/home/runner/work/HelloWorld/HelloWorld/bionic/.ccache",
              DOCKER_IMAGE: "lharmstrong/tesseract:melodic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: bionic,
@@ -21,7 +21,7 @@ jobs:
              }
           - {BADGE: xenial,
              CI_NAME: "Kinetic Build",
-             CCACHE_DIR: '${GITHUB_WORKSPACE}/xenial/.ccache',
+             CCACHE_DIR: "/home/runner/work/HelloWorld/HelloWorld/xenial/.ccache",
              DOCKER_IMAGE: "lharmstrong/tesseract:kinetic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: xenial,
@@ -44,7 +44,7 @@ jobs:
         path: ${{ matrix.env.BADGE }}/.ccache
         key: ${{ matrix.env.CI_NAME }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
         restore-keys: |
-          ${{ matrix.env.CI_NAME }}--ccache-
+          ${{ matrix.env.CI_NAME }}-ccache-
 
     - uses: 'ros-industrial/industrial_ci@master'
       env: ${{matrix.env}}
