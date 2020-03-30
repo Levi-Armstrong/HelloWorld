@@ -21,7 +21,7 @@ jobs:
              }
           - {BADGE: xenial,
              CI_NAME: "Kinetic Build",
-             CCACHE_DIR: "${{ GITHUB_WORKSPACE }}/xenial/.ccache",
+             CCACHE_DIR: "${{ github.workspace }}/xenial/.ccache",
              DOCKER_IMAGE: "lharmstrong/tesseract:kinetic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: xenial,
