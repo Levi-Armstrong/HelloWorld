@@ -12,7 +12,7 @@ jobs:
         env:
           - {BADGE: bionic,
              CI_NAME: "Melodic Build",
-             CCACHE_DIR: ${{ github.workspace }}'/bionic/.ccache',
+             CCACHE_DIR: '${{ github.workspace }}/bionic/.ccache',
              DOCKER_IMAGE: "lharmstrong/tesseract:melodic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: bionic,
@@ -21,7 +21,7 @@ jobs:
              }
           - {BADGE: xenial,
              CI_NAME: "Kinetic Build",
-             CCACHE_DIR: ${{ github.workspace }}'/xenial/.ccache',
+             CCACHE_DIR: '${{ github.workspace }}/xenial/.ccache',
              DOCKER_IMAGE: "lharmstrong/tesseract:kinetic",
              OS_NAME: ubuntu,
              OS_CODE_NAME: xenial,
