@@ -42,7 +42,7 @@ jobs:
       uses: actions/cache@v1.1.0
       with:
         path: ${{ matrix.env.BADGE }}/.ccache
-        key: ${{ matrix.env.CI_NAME }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
+        key: ${{ matrix.env.CI_NAME }}-${{github.repository}}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
         restore-keys: |
           ${{ matrix.env.CI_NAME }}-ccache-
 
